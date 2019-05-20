@@ -5,6 +5,7 @@ module.exports = {
     async setup() {
         browser = await puppeteer.launch();
         page = await browser.newPage();
+        page.setsetUserAgent("Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
         await page.setViewport({ width: 1920, height: 1080 });
     },
     async login(username, password, verificationMethod) {
@@ -117,5 +118,14 @@ module.exports = {
         });
 
         return tweets;
+    },
+    async follow(username) {
+        await page.goto(`https://twitter.com/${username}`, { waitUntil: "networkidle2" });
+
+        await page.evaluate(() => {
+            document.querySelector(".follow-text").click();
+        });
+
+        console.log(`Followed '${username}'`);
     }
 };

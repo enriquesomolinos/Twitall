@@ -7,6 +7,7 @@ _Searching for tweets has never been that easy!_
 ````javascript
 twitall.login(username, password, verificationMethod) // The verification method is most likely the phone number of the account but it could also be the email
 twitall.tweet(text)
+twitall.follow(username)
 twitall.deleteTweet(identifier, username) // The identifier gets returned from the tweet function
 twitall.query(advancedSearchURL) // You can create the advanced search url here: https://twitter.com/search-advanced
 twitall.getTrends()

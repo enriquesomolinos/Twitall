@@ -104,20 +104,18 @@ module.exports = {
     async query(advancedSearchURL) {
         await page.goto(advancedSearchURL, { waitUntil: "networkidle2" });
 
-        const tweets = await page.evaluate(() => {
+        return await page.evaluate(() => {
             let tweets = [];
 
             for (let i = 0; i < document.querySelectorAll("#timeline .stream-item-header .account-group > span.username").length; i++) {
                 let username = document.querySelectorAll("#timeline .stream-item-header .account-group > span.username")[i].innerText;
                 let text = document.querySelectorAll("#timeline .stream-item-header .account-group > span.username")[i].parentElement.parentElement.parentElement.getElementsByClassName("js-tweet-text-container")[0].innerText;
 
-                tweets.push({ username: username, text: text })
+                tweets.push({username: username, text: text})
             }
 
             return tweets;
         });
-
-        return tweets;
     },
     async follow(username) {
         await page.goto(`https://twitter.com/${username}`, { waitUntil: "networkidle2" });
@@ -127,5 +125,18 @@ module.exports = {
         });
 
         console.log(`Followed '${username}'`);
+    },
+    async getUserFollowers(username) {
+        await page.goto(`https://twitter.com/${username}/followers`, { waitUntil: "networkidle2" });
+
+        return await page.evaluate(() => {
+            let usernames = [];
+
+            for (let i = 0; i < document.querySelectorAll(".ProfileCard-screennameLink .username").length; i++) {
+                usernames.push(document.querySelectorAll(".ProfileCard-screennameLink .username")[i].innerText);
+            }
+
+            return usernames;
+        });
     }
 };

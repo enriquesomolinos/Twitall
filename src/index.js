@@ -5,7 +5,7 @@ module.exports = {
     async setup() {
         browser = await puppeteer.launch();
         page = await browser.newPage();
-        page.setsetUserAgent("Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
+        page.setUserAgent("Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2049.0 Safari/537.36");
         await page.setViewport({ width: 1920, height: 1080 });
     },
     async login(username, password, verificationMethod) {
@@ -31,8 +31,14 @@ module.exports = {
                     }, 500);
                 }
             }, verificationMethod);
+
+            if (page.url().includes("error")) {
+                console.log("Couldn't login.");
+                return;
+            }
+
+            console.log("Logged in");
         }, 5000);
-        console.log("Logged in");
     },
     async getTrends() {
         await page.goto("https://twitter.com/", { waitUntil: "networkidle2" });

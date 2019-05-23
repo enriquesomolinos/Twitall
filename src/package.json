@@ -1,8 +1,17 @@
 {
     "name": "twitall",
-    "version": "1.0.22",
+    "version": "1.2.0",
     "description": "The better Twitter API, free to use & no Twitter developer account required!",
-    "keywords": ["twitterbot", "twitter-bot", "twitter bot", "twitterapi", "twitter api", "twitter-api", "twitter", "social media bot"],
+    "keywords": [
+        "twitterbot",
+        "twitter-bot",
+        "twitter bot",
+        "twitterapi",
+        "twitter api",
+        "twitter-api",
+        "twitter",
+        "social media bot"
+    ],
     "homepage": "https://github.com/l2ig/Twitall",
     "bugs": {
         "email": "twitall@l2g.cc",
@@ -18,7 +27,7 @@
         "name": "Leonard Ginters"
     },
     "dependencies": {
-        "puppeteer": "^1.14.0"
+        "puppeteer": "^1.16.0"
     },
     "license": "LGPL-3.0"
 }
